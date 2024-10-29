@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CesMusic - Código de Validação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: #44B6D5;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333333;
+            font-size: 1.5em;
+        }
+        p {
+            color: #555555;
+        }
+        .validate-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #44B6D5;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .footer-text {
+            color: #999999;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        .footer-credits {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">CesMusic</div>
+        <h2>Olá, ${name}!</h2>
+        <p>Clique no botão abaixo para validar o seu e-mail:</p>
+
+        <a href="${url}" class="validate-button">
+            Validar E-mail
+        </a>
+
+        <p class="footer-text">Se você não solicitou essa validação, ignore este e-mail.</p>
+
+        <p class="footer-credits">&copy; ${currentYear} CesMusic. Todos os direitos reservados.</p>
+    </div>
+</body>
+</html>

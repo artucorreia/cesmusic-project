@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CesMusic - Novo Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+
+            background: linear-gradient(90deg, #CA83FF, #6ECFF7, #A8E34B); /* Gradient colors */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+
+            display: inline-block;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #555;
+        }
+        .section p {
+            margin: 0;
+            font-size: 16px;
+            color: #666;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #44B6D5;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>CesMusic</h1>
+        <div class="section">
+            <h2>Nome</h2>
+            <p>${name}</p>
+        </div>
+        <div class="section">
+            <h2>Email</h2>
+            <p>${login}</p>
+        </div>
+        <a href="${url}" target="_blank" class="btn">Aceitar Novo Usuário</a>
+        <div class="footer">
+            <p>&copy; ${currentYear} CesMusic. Todos os direitos reservados.</p>
+        </div>
+    </main>
+</body>
+</html>

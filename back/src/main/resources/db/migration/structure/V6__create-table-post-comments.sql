@@ -1,0 +1,7 @@
+CREATE TABLE post_comments (
+    id SERIAL PRIMARY KEY NOT NULL,
+    content TEXT NOT NULL,
+    user_id UUID REFERENCES users(id) NOT NULL,
+    post_id UUID REFERENCES posts(id) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);

@@ -1,0 +1,3 @@
+INSERT INTO users(id, name, email, password, role, about) VALUES
+    (gen_random_uuid(), 'Arthur Correia', 'arthurcorria0109@gmail.com', '$2a$10$J4a2Af74tr4fLVIY6eSF.OF1K2nzhHOEDk28louTwOSDez.iqQMgK', 'ADMIN', 'Administrador e desenvolvedor do sistema, tenho um gosto bastante eclético'),
+    (gen_random_uuid(), 'Emmanuel Tavares', 'emmanuel.t2003@hotmail.com', '$2a$10$BbGxmsnKXIBwoj7X/r9Nx.209Fxh5UUi/KV7/kgOEYGEqdMkfwnV2', 'ADMIN', 'Administrador e desenvolvedor do sistema, gosto de muito de compor e cantar músicas');

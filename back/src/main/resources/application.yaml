@@ -1,0 +1,44 @@
+website:
+  url: ${WEBSITE_URL}
+security:
+  jwt:
+    token:
+      secret: ${JWT_SECRET}
+spring:
+  application:
+    name: cesmusic
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+    show-sql: false
+  mail:
+#    host: smtp.gmail.com
+    host: sandbox.smtp.mailtrap.io
+    port: 587
+    username: ${EMAIL_USER}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+spring-doc:
+  pathsToMatch:
+    - /auth/**
+    - /api/v1/**
+  swagger-ui:
+    use-root-path: true
