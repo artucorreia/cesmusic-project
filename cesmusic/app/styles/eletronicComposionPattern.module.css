@@ -1,0 +1,300 @@
+/* :root {
+    --logo-gradient: 'linear-gradient(45deg, #E0EFED, #83D79E, #EC9435)';
+    --details-colors-a: '#EC9435';
+    --details-colors-b: '#69D1C5'
+}
+ */
+.container {
+    margin-top: 1rem;
+    width: 100%;
+    color: 'white';
+    overflow-y: auto;
+}
+
+.container .header h1#logo_text{
+    background: var(--logo-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+
+    padding-bottom: 1rem;
+}
+
+.container #logo_text {
+    position: absolute;
+    left: 2rem;
+    top: 1rem;
+    font-size: 1.5rem;
+}
+
+.container #logo_text:hover {
+    cursor: pointer
+}
+
+.input_block {
+
+    width: 60%;
+    max-width: 100%;
+
+    position: relative;
+
+    margin: auto;
+    margin-top: .5rem;
+
+    background: var(--logo-gradient);
+    padding: .18rem;
+
+    border-radius: .4rem;
+}
+
+.header h2 {
+    text-align: center;
+    font-size: 1.6rem;
+
+    margin-top: 1rem;
+}
+
+
+.input_block input#search {    
+
+    width: 100%;
+    height: 3rem;
+    border-radius: .3rem;
+    padding-left: 1rem;
+
+    outline-style: none;
+
+
+    background: white;
+}
+
+.input_block #play.not_show {
+
+    position: absolute;
+
+    color: rgb(82, 240, 82);
+    opacity: 80%;
+    visibility: hidden;
+    transition: all;
+}
+
+.input_block #play.show {
+    color: green;
+
+    opacity: 100%;
+
+    transition: all;
+    transition-duration: 3000ms;
+}
+
+.input_block button {
+    
+    height: 100%;
+    width: 3rem;
+    margin-right: 1rem;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    bottom: .01rem;
+
+    overflow-y: hidden;
+}
+
+#circle.not_show {
+    display: absolute;
+    width: 1rem;
+    height: 1rem;
+
+    outline: rgb(250, 139, 158);
+    transition: all;
+    transition-duration: 500ms;
+}
+
+#circle {
+    display: absolute;
+    width: 1rem;
+    height: 1rem;
+    outline: auto rgb(243, 227, 230);
+    border-radius: 1rem;
+
+    transition: ease-out;
+    transition-duration: 3000ms;
+}
+  
+
+/* ---------------------- POST STYLES ----------------------  */
+
+.container .postA button p{
+    background-color: var(--details-color-a);
+
+    padding: .3rem;
+    border-radius: .2rem;
+}
+
+.container .postB button p{
+    background-color: var(--details-color-b);
+
+    padding: .3rem;
+    border-radius: .2rem;
+}
+
+.container .postA #owner_name {
+    color: var(--details-color-a);
+}
+
+.container .postB #owner_name {
+    color: var(--details-color-b);
+}
+
+.container .post {
+    display: flex;
+    flex-direction: column; 
+    text-wrap: wrap;
+
+    padding: 3rem;
+
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.container .post::after {
+    content: "";
+    display: block;
+
+    width: 100%;
+    height: .07rem;
+    margin-top: 1rem;
+
+    background-color: rgba(128, 128, 128, 0.164);
+}
+
+.container .post .title_and_text h1 {
+    font-size: 1.5rem;
+}
+
+.container .post .title_and_text p{
+    margin-top: 1rem;
+}
+
+.container .post .info_bellow {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container .post .info_bellow button{
+    color: white;
+
+    text-align: left;
+    margin-top: 2rem;
+    margin-left: -1rem;
+
+    background-color: var(--post-button-collor);
+    width: fit-content;
+
+    padding-inline: 1rem;
+    padding-block: .5rem;
+    border-radius: .3rem;
+}
+
+.container .post .info_bellow #post_likes{
+
+    font-size: 1.5rem;
+    color: rgb(209, 70, 70);
+
+    margin-top: 2rem;
+
+}
+
+.container .post .info_bellow p#owner_name{
+    margin-top: 2rem;
+    font-size: .9rem;
+}
+
+.container .post .info_bellow .likes_and_owner {
+    display: flex;
+    gap: 1rem;
+}
+
+
+@media (width <= 768px) {
+
+    .container .header h1#logo_text {
+        font-size: 1.4rem;
+    }
+
+    .container .header h2 {
+        margin-top: .8rem;
+    }
+
+    .container .header button {
+        overflow-y: hidden;
+        margin-bottom: .4rem;
+    }
+
+    #circle {
+        margin-top: .1rem;
+    }
+
+    .container .header .input_block {
+        margin-top: 1rem;  
+        width: 90vw;      
+    }
+
+    .input_block input#search {    
+
+        width: 100%;
+        height: 2rem;
+        border-radius: .3rem;
+        padding-left: 1rem;
+    
+        outline-style: none;
+    
+    
+        background: white;
+    }
+
+
+    /* ---------------------- POST STYLES ----------------------  */
+
+    .container .post {
+        margin-top: -1rem;
+        gap: 1rem;
+    }
+
+    .container .post button p {
+        text-align: center;
+
+        font-size: .8rem;
+        width: 9rem;
+    }
+
+    .container .post button {
+        width: 4rem;
+    }
+
+    .container .post p#owner_name {
+        font-size: .3rem;
+        text-align: right;
+
+        width: 9rem;
+    }
+
+    .container .post .info_bellow .likes_div{
+    
+        margin-bottom: -2rem;
+        margin-inline: auto;
+    
+    }
+
+    .container .post .info_bellow .likes_and_owner {
+        display: flex;
+        flex-direction: column;
+    }
+    
+}

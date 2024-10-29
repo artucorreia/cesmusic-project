@@ -1,0 +1,52 @@
+.container {
+
+    margin: 0;
+    padding: 0;
+
+    background: url('../assets/landingPageABG.svg');
+    width: 100%;
+    height: 100vh;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+
+    box-sizing: border-box;
+}
+
+.container .cesmusic_title {
+    position: absolute;
+
+    top: 25%;
+    left: 0;
+    right: 0;
+    width: 30rem;
+
+    margin-inline: auto;
+} 
+
+.container .scroll_down {
+    margin-inline: auto;
+
+    margin-top: -5rem;
+
+    width: .7rem;
+}
+
+@media (width <= 450px) {
+
+    .container {
+        background-position-x: -10rem;
+    }
+
+    .container .cesmusic_title {
+        position: absolute;
+    
+        top: 25%;
+        left: 0;
+        right: 0;
+        width: 80%;
+    
+        margin-inline: auto;
+    } 
+}
