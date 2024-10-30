@@ -1,10 +1,8 @@
 package com.blog.cesmusic.services;
 
-import com.blog.cesmusic.data.DTO.v1.output.PostDTO;
 import com.blog.cesmusic.data.DTO.v1.output.TagDTO;
 import com.blog.cesmusic.exceptions.general.ResourceNotFoundException;
 import com.blog.cesmusic.mapper.Mapper;
-import com.blog.cesmusic.repositories.PostRepository;
 import com.blog.cesmusic.repositories.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
