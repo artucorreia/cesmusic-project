@@ -25,7 +25,7 @@ public class PostCreateDTO {
     @NotNull @NotBlank @Size(min = 30, max = 20000)
     private String content;
 
-    @NotNull
+    @JsonIgnore
     private UserDTO user;
 
     @NotNull @NotEmpty
@@ -77,11 +77,11 @@ public class PostCreateDTO {
         this.content = content.trim();
     }
 
-    public @NotNull UserDTO getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(@NotNull UserDTO user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 

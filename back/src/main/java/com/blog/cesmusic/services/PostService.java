@@ -3,6 +3,7 @@ package com.blog.cesmusic.services;
 import com.blog.cesmusic.controllers.PostController;
 import com.blog.cesmusic.controllers.TagController;
 import com.blog.cesmusic.data.DTO.v1.create.PostCreateDTO;
+import com.blog.cesmusic.data.DTO.v1.output.CreateResponseDTO;
 import com.blog.cesmusic.data.DTO.v1.output.PostDTO;
 import com.blog.cesmusic.data.DTO.v1.output.TagDTO;
 import com.blog.cesmusic.exceptions.general.ResourceNotFoundException;
@@ -10,6 +11,7 @@ import com.blog.cesmusic.mapper.Mapper;
 import com.blog.cesmusic.model.Post;
 import com.blog.cesmusic.projections.PostListProjection;
 import com.blog.cesmusic.repositories.PostRepository;
+import com.blog.cesmusic.services.auth.TokenService;
 import com.blog.cesmusic.services.util.PostValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,20 +34,26 @@ public class PostService {
 
     private final PostRepository repository;
     private final TagService tagService;
+    private final TokenService tokenService;
+    private final UserService userService;
     private final PostValidatorService postValidatorService;
     private final Mapper mapper;
-    private final PagedResourcesAssembler assembler;
+    private final PagedResourcesAssembler<PostDTO> assembler;
 
     @Autowired
     public PostService(
             PostRepository repository,
             TagService tagService,
+            TokenService tokenService,
+            UserService userService,
             PostValidatorService postValidatorService,
             Mapper mapper,
-            PagedResourcesAssembler assembler
+            PagedResourcesAssembler<PostDTO> assembler
     ) {
         this.repository = repository;
         this.tagService = tagService;
+        this.tokenService = tokenService;
+        this.userService = userService;
         this.postValidatorService = postValidatorService;
         this.mapper = mapper;
         this.assembler = assembler;
@@ -86,22 +94,13 @@ public class PostService {
         );
     }
 
-    /*public List<PostDTO> findByUserId(UUID id) {
-        LOGGER.info("Finding posts by user id");
-        return mapper.map(
-                repository.findByUserId(id),
-                PostDTO.class
-        );
-    }*/
-
     @Transactional(rollbackFor = Exception.class)
-    public PostDTO create(PostCreateDTO postCreateDTO) {
+    public CreateResponseDTO<UUID> create(PostCreateDTO postCreateDTO) {
         LOGGER.info("Creating a new post");
-        postValidatorService.validateRelationships(
-                postCreateDTO.getUser().getId(),
-                postCreateDTO.getTags().stream().map(TagDTO::getId).toList()
-        );
+        postCreateDTO.setUser(userService.findById(tokenService.getUserId()));
+        postValidatorService.validateRelationships(postCreateDTO.getTags().stream().map(TagDTO::getId).toList());
         Post entity = mapper.map(postCreateDTO, Post.class);
-        return mapper.map(repository.save(entity), PostDTO.class);
+        PostDTO post = mapper.map(repository.save(entity), PostDTO.class);
+        return new CreateResponseDTO<>(post.getId(), "Post criado com sucesso");
     }
 }

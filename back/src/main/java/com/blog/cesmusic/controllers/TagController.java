@@ -2,7 +2,6 @@ package com.blog.cesmusic.controllers;
 
 import com.blog.cesmusic.data.DTO.v1.output.PostDTO;
 import com.blog.cesmusic.services.PostService;
-import com.blog.cesmusic.services.TagService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -27,12 +26,10 @@ import java.util.UUID;
 @RequestMapping("/api/v1/tags")
 @Tag(name = "Tag", description = "Endpoints for manage tags")
 public class TagController {
-    private final TagService service;
     private final PostService postService;
 
     @Autowired
-    public TagController(TagService service, PostService postService) {
-        this.service = service;
+    public TagController(PostService postService) {
         this.postService = postService;
     }
 

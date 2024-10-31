@@ -47,8 +47,11 @@ public class SecurityConfigurations {
 
                                 // posts
                                 .requestMatchers(HttpMethod.GET, "/api/v1/posts/{id}").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/v1/posts/tag/{id}").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/v1/posts").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.POST, "/api/v1/posts").authenticated()
+
+                                // posts comments
+                                .requestMatchers(HttpMethod.GET, "/api/v1/post-comments/{postId}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/post-comments").authenticated()
 
                                 // tags
                                 .requestMatchers(HttpMethod.GET, "/api/v1/tags/{id}/posts").permitAll()

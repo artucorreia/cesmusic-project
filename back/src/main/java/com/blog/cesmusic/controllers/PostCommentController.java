@@ -1,10 +1,11 @@
 package com.blog.cesmusic.controllers;
 
-import com.blog.cesmusic.data.DTO.v1.create.PostCreateDTO;
+import com.blog.cesmusic.data.DTO.v1.create.PostCommentCreateDTO;
 import com.blog.cesmusic.data.DTO.v1.output.CreateResponseDTO;
-import com.blog.cesmusic.data.DTO.v1.output.PostDTO;
-import com.blog.cesmusic.services.PostService;
+import com.blog.cesmusic.data.DTO.v1.output.PostCommentDTO;
+import com.blog.cesmusic.services.PostCommentService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,59 +19,29 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin(origins = {"http://localhost:8080", "http://localhost:3000", "https://musical-blog-cesmac.vercel.app"})
 @RestController
-@RequestMapping("/api/v1/posts")
-@Tag(name = "Post", description = "Endpoints to manage posts")
-public class PostController {
-    private final PostService service;
+@RequestMapping("/api/v1/post-comments")
+@Tag(name = "Post Comment", description = "Endpoints to manage post comments")
+public class PostCommentController {
+    private final PostCommentService service;
 
     @Autowired
-    public PostController(PostService service) {
+    public PostCommentController(PostCommentService service) {
         this.service = service;
     }
 
     @GetMapping(
-            value = "/{id}",
+            value = "/{postId}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @Operation(
-            summary = "Find post by id",
-            description = "Find post by id",
-            tags = {"Post"},
-            method = "GET"
-    )
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Success",
-                            content = @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = PostDTO.class)
-                            )
-                    ),
-                    @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
-                    @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
-                    @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content),
-                    @ApiResponse(responseCode = "404", description = "Not Found", content = @Content),
-                    @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content)
-            }
-    )
-    public ResponseEntity<PostDTO> findById(@PathVariable UUID id) {
-        return ResponseEntity.ok(service.findById(id));
-    }
-
-    /*@GetMapping(
-            value = "/user/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    @Operation(
-            summary = "Find posts by user id",
-            description = "Find posts by user id",
-            tags = {"Post"},
+            summary = "Find comments post by id",
+            description = "Find comments post by id",
+            tags = {"Post Comment"},
             method = "GET"
     )
     @ApiResponses(
@@ -81,35 +52,36 @@ public class PostController {
                             content = @Content(
                                     mediaType = "application/json",
                                     array = @ArraySchema(
-                                            arraySchema = @Schema(implementation = PostDTO.class)
+                                            schema = @Schema(implementation = PostCommentDTO.class)
                                     )
                             )
                     ),
                     @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
                     @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
                     @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content),
+                    @ApiResponse(responseCode = "404", description = "Not Found", content = @Content),
                     @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content)
             }
     )
-    public ResponseEntity<List<PostDTO>> findByTagId(@PathVariable UUID id) {
-        return ResponseEntity.ok(service.findByTagId(id));
-    }*/
+    public ResponseEntity<List<PostCommentDTO>> findByPostId(@PathVariable UUID postId) {
+        return ResponseEntity.ok(service.findByPostId(postId));
+    }
 
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @Operation(
-            summary = "Create a post",
-            description = "Create a post",
-            tags = {"Post"},
+            summary = "Create a comment",
+            description = "Create a comment",
+            tags = {"Post Comment"},
             method = "POST",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
                                     value = """
-                                            { "title*": "string", "capeImagePath": "string", "summary*": "string", "content*": "string", "user*": {"id": "uuid"}, "tags*": [{"id": "uuid"}] }
+                                            { "content*": "string", "post*": {"id": "uuid"}, "user*": {"id": "uuid"} }
                                             """
                             )
                     )
@@ -131,7 +103,7 @@ public class PostController {
                     @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content)
             }
     )
-    public ResponseEntity<CreateResponseDTO<UUID>> create(@Valid @RequestBody PostCreateDTO postCreateDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(postCreateDTO));
+    public ResponseEntity<CreateResponseDTO<Long>> create(@Valid @RequestBody PostCommentCreateDTO commentCreateDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(commentCreateDTO));
     }
 }

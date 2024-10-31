@@ -2,7 +2,6 @@ package com.blog.cesmusic.controllers;
 
 import com.blog.cesmusic.data.DTO.v1.output.RegisterResponseDTO;
 import com.blog.cesmusic.data.DTO.v1.output.UserDTO;
-import com.blog.cesmusic.services.PostService;
 import com.blog.cesmusic.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -26,15 +25,10 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService service;
-    private final PostService postService;
 
     @Autowired
-    public UserController(
-            UserService service,
-            PostService postService
-    ) {
+    public UserController(UserService service) {
         this.service = service;
-        this.postService = postService;
     }
 
     @GetMapping(
