@@ -11,6 +11,7 @@ import com.blog.cesmusic.model.PendingUser;
 import com.blog.cesmusic.repositories.PendingUserRepository;
 import com.blog.cesmusic.services.mail.MailService;
 import com.blog.cesmusic.services.util.LoginCodeGenerator;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,7 @@ public class PendingUserService {
         );
     }
 
+    @Transactional(rollbackOn = Exception.class)
     public RegisterResponseDTO register(RegisterDTO data) {
         LOGGER.info("Registering a new pending user");
         checkEmailAvailability(data);
@@ -88,13 +90,11 @@ public class PendingUserService {
 
     private PendingUser pendingUserFactory(RegisterDTO data) {
         String passwordEncoder = new BCryptPasswordEncoder().encode(data.getPassword());
-        return new PendingUser(
-                data.getName().toUpperCase(),
-                data.getEmail(),
-                passwordEncoder,
-                LoginCodeGenerator.generateCode(),
-                LocalDateTime.now()
-        );
+        PendingUser result = mapper.map(data, PendingUser.class);
+        result.setName(result.getName().toUpperCase());
+        result.setCode(LoginCodeGenerator.generateCode());
+        result.setPassword(passwordEncoder);
+        return result;
     }
 
     private PendingUserDTO create(PendingUser entity) {

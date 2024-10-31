@@ -1,5 +1,5 @@
 CREATE TABLE pending_users (
-    id SMALLINT PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(60) UNIQUE NOT NULL,
     password VARCHAR(100) NOT NULL,

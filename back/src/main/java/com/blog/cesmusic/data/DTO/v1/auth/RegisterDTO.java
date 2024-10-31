@@ -1,9 +1,12 @@
 package com.blog.cesmusic.data.DTO.v1.auth;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.time.LocalDateTime;
 
 public class RegisterDTO {
 
@@ -22,10 +25,17 @@ public class RegisterDTO {
     @Size(min = 8, max = 50)
     private String password;
 
-    public RegisterDTO(String name, String email, String password) {
+    @JsonIgnore
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    public RegisterDTO() {
+    }
+
+    public RegisterDTO(String name, String email, String password, LocalDateTime createdAt) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.createdAt = createdAt;
     }
 
     public String getName() {
@@ -50,5 +60,13 @@ public class RegisterDTO {
 
     public void setPassword(String password) {
         this.password = password.trim();
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
